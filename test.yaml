@@ -1,0 +1,18 @@
+# An employee record
+name: Martin D'vloper
+job: Developer
+skill: Apple
+employed: True
+foods:
+    - 1
+    - Orange
+    - Strawberry
+    - Mango
+languages:
+    perl: Elite
+    python: Elite
+    pascal: Apple
+education: |
+    4 GCSEs
+    3 A-Levels
+    BSc in the Internet of Things
