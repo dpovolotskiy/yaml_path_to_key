@@ -1,19 +1,28 @@
 import yaml
 import argparse
+from termcolor import colored
 
 
 def get_full_path_to_value(value, dictionary, path=""):
     if isinstance(dictionary, (dict, list, tuple)):
         if value in dictionary:
-            print(path[1:] + ":" + str(value))
+            print(path[1:] + ":" + colored(str(value), "red"))
             return
-        elif value not in dictionary and (not isinstance(dictionary, dict) or len(dictionary.keys()) == 0):
+        elif value not in dictionary and len(dictionary) == 0:
             return
         else:
-            for key in dictionary.keys():
-                get_full_path_to_value(value, dictionary[key], path=path + ":" + str(key))
+            for key in dictionary:
+                if isinstance(dictionary, list):
+                    for i in range(len(dictionary)):
+                        if dictionary[i] == key:
+                            id_key = i
+                            break
+                    get_full_path_to_value(value, key, path=path + "[{}]".format(id_key))
+                else:
+                    get_full_path_to_value(value, dictionary[key],
+                                           path=path + ":" + str(key))
     elif type(value) == type(dictionary) and value == dictionary:
-        print(path[1:] + ":" + str(value))
+        print(path[1:] + ":" + colored(str(value), "red"))
         return
     else:
         return
